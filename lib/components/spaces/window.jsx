@@ -8,7 +8,7 @@ const settings = Settings.get();
 
 const Window = ({ window }) => {
   const ref = Uebersicht.React.useRef();
-  const { displayOnlyCurrent, hideWindowTitle, displayOnlyIcon } =
+  const { displayOnlyCurrent, hideWindowTitle, displayOnlyIcon, displayFullTitles } =
     settings.process;
   const {
     "is-minimized": isMinimized,
@@ -27,6 +27,7 @@ const Window = ({ window }) => {
   const isFocused = hasFocus ?? __legacyHasFocus;
   const Icon = AppIcons.apps[appName] || AppIcons.apps.Default;
   const classes = Utils.classnames("process__window", {
+    "process__window--show": displayFullTitles && !isFocused,
     "process__window--focused": !displayOnlyCurrent && isFocused,
     "process__window--only-current": displayOnlyCurrent,
     "process__window--only-icon": displayOnlyIcon,
